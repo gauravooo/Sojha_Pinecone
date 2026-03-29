@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sojha Pinecone | Himalayan Retreat</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#FAF9F6', /* Off-white background */
+                            dark: '#1F3327',  /* Deep Forest Green */
+                            accent: '#3A5A46', /* Mid Green */
+                            text: '#2C2C2C'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom Styles for styling touches */
+        body { background-color: #FAF9F6; color: #2C2C2C; }
+        .hero-bg {
+            background-image: linear-gradient(rgba(31, 51, 39, 0.4), rgba(31, 51, 39, 0.7)), url('https://images.unsplash.com/photo-1542224566-6e85f2e6772f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .form-input {
+            background: transparent;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 8px 0;
+            width: 100%;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+        .form-input:focus { border-bottom-color: #fff; }
+        .form-input::placeholder { color: rgba(255,255,255,0.5); }
+        
+        /* Webkit Date Picker styling to look decent on dark background */
+        ::-webkit-calendar-picker-indicator { filter: invert(1); opacity: 0.5; cursor: pointer; }
+    </style>
+</head>
+<body class="font-sans antialiased">
+
+    <nav class="fixed w-full z-50 bg-brand-light/90 backdrop-blur-md transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="font-serif text-2xl font-semibold text-brand-dark tracking-wide">Sojha Pinecone</a>
+            <div class="hidden md:flex space-x-8 text-sm font-medium text-gray-700">
+                <a href="#about" class="hover:text-brand-accent transition">About</a>
+                <a href="#rooms" class="hover:text-brand-accent transition">Rooms</a>
+                <a href="#gallery" class="hover:text-brand-accent transition">Gallery</a>
+                <a href="#explore" class="hover:text-brand-accent transition">Explore</a>
+                <a href="#contact" class="hover:text-brand-accent transition">Contact</a>
+            </div>
+            <button onclick="scrollToContact()" class="bg-brand-dark hover:bg-brand-accent text-white px-6 py-2 rounded-sm transition text-sm font-medium tracking-wide">
+                Book Now
+            </button>
+        </div>
+    </nav>
+
+    <section class="hero-bg h-screen flex items-center justify-center text-center px-4">
+        <div class="max-w-3xl animate-fade-in-up">
+            <p class="text-white/80 tracking-[0.2em] text-sm font-semibold uppercase mb-4">Welcome to Sojha</p>
+            <h1 class="font-serif text-5xl md:text-7xl text-white font-medium mb-6 leading-tight">
+                A Sanctuary <br/> in the Pines
+            </h1>
+            <p class="text-lg md:text-xl text-white/90 font-light mb-10">
+                Your peaceful retreat in the pristine forests of Himachal.
+            </p>
+            <button onclick="scrollToContact()" class="bg-brand-dark hover:bg-brand-accent text-white px-8 py-3 rounded-sm transition text-sm font-medium tracking-wide inline-flex items-center gap-2">
+                Book Your Stay <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+        </div>
+    </section>
+
+    <section id="about" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+            <div>
+                <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-4">Discover</p>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark mb-6 leading-tight">Where Nature Meets Comfort</h2>
+                <p class="text-gray-600 font-light leading-relaxed mb-8">
+                    A cozy stay surrounded by lush deodar forests and panoramic Himalayan views. At Sojha Pinecone, we offer more than just accommodation—we provide an experience of tranquility, authenticity, and connection with nature.
+                </p>
+                <div class="bg-white p-6 rounded-lg shadow-sm border border-gray-100 flex items-start gap-4">
+                    <i class="fa-solid fa-location-dot text-brand-accent mt-1"></i>
+                    <div>
+                        <h4 class="font-medium text-brand-dark mb-1">Find Us</h4>
+                        <p class="text-sm text-gray-600 font-light">Sojha Pinecone, Sojha Village<br>Banjar Valley, Himachal Pradesh, India</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative h-[500px] rounded-lg overflow-hidden shadow-xl">
+                <img src="https://images.unsplash.com/photo-1542718610-a1d656d1884c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sojha Nature" class="absolute inset-0 w-full h-full object-cover">
+            </div>
+        </div>
+    </section>
+
+    <section id="rooms" class="py-24 px-6 bg-white/50 border-y border-gray-200/50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-2">Accommodation</p>
+                <h2 class="font-serif text-4xl md:text-5xl text-brand-dark">Our Rooms</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="h-[400px] rounded-lg overflow-hidden shadow-md">
+                    <img src="https://images.unsplash.com/photo-1566665797739-1674de7a421a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Deluxe Room" class="w-full h-full object-cover hover:scale-105 transition duration-700">
+                </div>
+                <div>
+                    <h3 class="font-serif text-3xl text-brand-dark mb-4">Deluxe Mountain View</h3>
+                    <p class="text-gray-600 font-light mb-8 leading-relaxed">
+                        Our signature rooms offer breathtaking views of the Himalayan peaks. Wake up to misty mountains and fall asleep to the sound of rustling pines. Designed with warm wood accents and premium linens.
+                    </p>
+                    <div class="grid grid-cols-2 gap-4 text-sm text-gray-700">
+                        <p><i class="fa-regular fa-circle-check text-brand-accent mr-2"></i> King-size bed</p>
+                        <p><i class="fa-regular fa-circle-check text-brand-accent mr-2"></i> Private balcony</p>
+                        <p><i class="fa-regular fa-circle-check text-brand-accent mr-2"></i> Mountain view</p>
+                        <p><i class="fa-regular fa-circle-check text-brand-accent mr-2"></i> Attached bathroom</p>
+                        <p><i class="fa-regular fa-circle-check text-brand-accent mr-2"></i> Room heater</p>
+                        <p><i class="fa-regular fa-circle-check text-brand-accent mr-2"></i> 24/7 hot water</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-20 px-6 max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+            <h2 class="font-serif text-3xl md:text-4xl text-brand-dark mb-4">Services We Provide</h2>
+            <p class="text-gray-500 font-light">Everything you need for a comfortable stay.</p>
+        </div>
+        <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                <i class="fa-solid fa-bed text-3xl text-brand-accent mb-4"></i>
+                <h4 class="font-medium text-brand-dark">Cozy Rooms</h4>
+                <p class="text-xs text-gray-500 mt-2">With spectacular mountain views</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                <i class="fa-solid fa-utensils text-3xl text-brand-accent mb-4"></i>
+                <h4 class="font-medium text-brand-dark">Traditional Meals</h4>
+                <p class="text-xs text-gray-500 mt-2">Authentic Himachali cuisine</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                <i class="fa-solid fa-wifi text-3xl text-brand-accent mb-4"></i>
+                <h4 class="font-medium text-brand-dark">High-Speed Wi-Fi</h4>
+                <p class="text-xs text-gray-500 mt-2">Stay connected even in the mountains</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                <i class="fa-solid fa-person-hiking text-3xl text-brand-accent mb-4"></i>
+                <h4 class="font-medium text-brand-dark">Trekking & Guides</h4>
+                <p class="text-xs text-gray-500 mt-2">Explore local trails safely</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                <i class="fa-solid fa-fire text-3xl text-brand-accent mb-4"></i>
+                <h4 class="font-medium text-brand-dark">Bonfire & Music</h4>
+                <p class="text-xs text-gray-500 mt-2">Warm up under the starry sky</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg shadow-sm border border-gray-100 hover:shadow-md transition">
+                <i class="fa-solid fa-square-parking text-3xl text-brand-accent mb-4"></i>
+                <h4 class="font-medium text-brand-dark">Free Parking</h4>
+                <p class="text-xs text-gray-500 mt-2">Safe parking for your vehicles</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-12">
+                <p class="text-xs font-semibold tracking-widest text-gray-500 uppercase mb-2">Gallery</p>
+                <h2 class="font-serif text-4xl text-brand-dark">Moments from Sojha</h2>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4 auto-rows-[200px]">
+                <div class="col-span-1 row-span-2 rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1546944641-55db293b6667?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="Mountain Mist">
+                </div>
+                <div class="col-span-1 row-span-1 rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1627885435985-78096f2e82b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="Forest Trail">
+                </div>
+                <div class="col-span-1 row-span-1 rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1588615419958-37daebfc7e0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="Cozy Interior">
+                </div>
+                <div class="col-span-2 md:col-span-2 row-span-1 rounded-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="Valley View">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="explore" class="py-24 px-6 max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-16">
+            <div>
+                <h2 class="font-serif text-3xl text-brand-dark mb-8">Places to Visit Nearby</h2>
+                <ul class="space-y-6">
+                    <li class="flex gap-4">
+                        <div class="mt-1 bg-brand-light text-brand-accent p-2 rounded-full h-8 w-8 flex items-center justify-center shrink-0"><i class="fa-solid fa-mountain"></i></div>
+                        <div>
+                            <h4 class="font-medium text-brand-dark text-lg">Jalori Pass</h4>
+                            <p class="text-sm text-gray-600 font-light mt-1">Stunning mountain pass just 5 km away.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="mt-1 bg-brand-light text-brand-accent p-2 rounded-full h-8 w-8 flex items-center justify-center shrink-0"><i class="fa-solid fa-water"></i></div>
+                        <div>
+                            <h4 class="font-medium text-brand-dark text-lg">Serolsar Lake</h4>
+                            <p class="text-sm text-gray-600 font-light mt-1">A peaceful, pristine lake surrounded by dense forests.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="mt-1 bg-brand-light text-brand-accent p-2 rounded-full h-8 w-8 flex items-center justify-center shrink-0"><i class="fa-brands fa-fort-awesome"></i></div>
+                        <div>
+                            <h4 class="font-medium text-brand-dark text-lg">Raghupur Fort</h4>
+                            <p class="text-sm text-gray-600 font-light mt-1">Ancient ruins offering 360-degree panoramic valley views.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="mt-1 bg-brand-light text-brand-accent p-2 rounded-full h-8 w-8 flex items-center justify-center shrink-0"><i class="fa-solid fa-tree"></i></div>
+                        <div>
+                            <h4 class="font-medium text-brand-dark text-lg">Great Himalayan National Park</h4>
+                            <p class="text-sm text-gray-600 font-light mt-1">A UNESCO heritage site for nature walks.</p>
+                        </div>
+                    </li>
+                    <li class="flex gap-4">
+                        <div class="mt-1 bg-brand-light text-brand-accent p-2 rounded-full h-8 w-8 flex items-center justify-center shrink-0"><i class="fa-solid fa-droplet"></i></div>
+                        <div>
+                            <h4 class="font-medium text-brand-dark text-lg">Jibhi Waterfalls</h4>
+                            <p class="text-sm text-gray-600 font-light mt-1">Nearby hidden gems nestled in the valley.</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="bg-brand-dark text-white p-10 rounded-lg flex flex-col justify-center">
+                <h2 class="font-serif text-3xl mb-8">Best Ways to Reach Us</h2>
+                <div class="space-y-8">
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fa-solid fa-car text-xl text-brand-light/70"></i>
+                            <h4 class="font-medium text-lg text-brand-light">By Road</h4>
+                        </div>
+                        <p class="text-sm text-white/70 font-light leading-relaxed">
+                            Drive or take a bus from Delhi/Chandigarh to Aut (NH3), then hire a local taxi or bus toward Banjar and Sojha.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-3 mb-2">
+                            <i class="fa-solid fa-plane text-xl text-brand-light/70"></i>
+                            <h4 class="font-medium text-lg text-brand-light">By Air</h4>
+                        </div>
+                        <p class="text-sm text-white/70 font-light leading-relaxed">
+                            The nearest airport is Bhuntar Airport (Kullu), approximately 50 km away, where taxis are readily available to bring you directly to us.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="bg-brand-dark text-white py-24 px-6 relative">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
+            
+            <div class="flex flex-col h-full">
+                <h2 class="font-serif text-4xl md:text-5xl mb-6">Get in Touch</h2>
+                <p class="text-white/70 font-light mb-12 max-w-md">
+                    We'd love to hear from you. Send us your inquiry and we'll respond within 24 hours to help plan your perfect mountain retreat.
+                </p>
+                
+                <div class="space-y-6 mb-12">
+                    <div class="flex items-start gap-4">
+                        <i class="fa-solid fa-phone mt-1 text-brand-light/50"></i>
+                        <div>
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1">Phone</p>
+                            <p class="font-light">+91 98765 43210</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fa-regular fa-envelope mt-1 text-brand-light/50"></i>
+                        <div>
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1">Email</p>
+                            <p class="font-light">info@sojhapinecone.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-4">
+                        <i class="fa-solid fa-location-dot mt-1 text-brand-light/50"></i>
+                        <div>
+                            <p class="text-xs text-white/50 uppercase tracking-wider mb-1">Address</p>
+                            <p class="font-light leading-relaxed">Sojha Village, Banjar Valley<br>Himachal Pradesh, India</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full h-64 rounded-lg overflow-hidden mt-auto shadow-inner">
+                    <iframe 
+                        src="https://maps.google.com/maps?q=31.5385,77.3820&z=14&output=embed" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            </div>
+
+            <div>
+                <form id="bookingForm" class="space-y-8 bg-[#1a2e23] p-8 md:p-10 rounded-xl shadow-2xl">
+                    <div class="grid grid-cols-1 gap-8">
+                        <div>
+                            <label class="text-xs text-white/50 uppercase tracking-wider mb-2 block">Your Name</label>
+                            <input type="text" id="name" required class="form-input text-sm">
+                        </div>
+                        <div>
+                            <label class="text-xs text-white/50 uppercase tracking-wider mb-2 block">Email Address</label>
+                            <input type="email" id="email" required class="form-input text-sm">
+                        </div>
+                        <div>
+                            <label class="text-xs text-white/50 uppercase tracking-wider mb-2 block">Phone Number</label>
+                            <input type="tel" id="phone" required class="form-input text-sm">
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-6">
+                        <div>
+                            <label class="text-xs text-white/50 uppercase tracking-wider mb-2 block">Check-in</label>
+                            <input type="date" id="checkin" class="form-input text-sm">
+                        </div>
+                        <div>
+                            <label class="text-xs text-white/50 uppercase tracking-wider mb-2 block">Check-out</label>
+                            <input type="date" id="checkout" class="form-input text-sm">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="text-xs text-white/50 uppercase tracking-wider mb-2 block">Your Message or Special Requests</label>
+                        <textarea id="message" rows="3" required class="form-input text-sm resize-none"></textarea>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-brand-light text-brand-dark hover:bg-white py-4 rounded-sm transition font-medium text-sm tracking-wide mt-4">
+                        Submit Request
+                    </button>
+                    
+                    <div id="formStatus" class="text-sm font-light text-center hidden mt-4"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#15241b] text-white/50 py-8 text-center text-sm font-light">
+        <p>&copy; 2026 Sojha Pinecone. All rights reserved. | Created for AI Engineer Journey.</p>
+    </footer>
+
+    <script>
+        // 1. Smooth Scroll
+        function scrollToContact() {
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 2. Navbar Background on Scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) nav.classList.add('shadow-sm');
+            else nav.classList.remove('shadow-sm');
+        });
+
+        // 3. Dynamic Gallery Fetch
+        // This calls your Python backend to get the photos
+        async function loadGallery() {
+            try {
+                const response = await fetch('http://localhost:8000/api/gallery');
+                const data = await response.json();
+                
+                const galleryContainer = document.querySelector('#gallery .grid');
+                galleryContainer.innerHTML = ''; // Clear existing static HTML
+
+                data.images.forEach((img, index) => {
+                    // Determine sizing based on index to recreate the masonry layout
+                    let spanClasses = "col-span-1 row-span-1";
+                    if(index === 0) spanClasses = "col-span-1 row-span-2";
+                    if(index === 3) spanClasses = "col-span-2 md:col-span-2 row-span-1";
+
+                    const imgHTML = `
+                        <div class="${spanClasses} rounded-lg overflow-hidden">
+                            <img src="${img.url}" class="w-full h-full object-cover hover:scale-105 transition duration-500" alt="${img.alt}">
+                        </div>
+                    `;
+                    galleryContainer.innerHTML += imgHTML;
+                });
+            } catch (error) {
+                console.error("Error loading gallery from backend:", error);
+            }
+        }
+
+        // 4. Secure Form Submission
+        document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const statusMsg = document.getElementById('formStatus');
+            
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                checkin: document.getElementById('checkin').value,
+                checkout: document.getElementById('checkout').value,
+                message: document.getElementById('message').value
+            };
+
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending...';
+            btn.disabled = true;
+            statusMsg.classList.remove('hidden', 'text-red-400', 'text-green-400');
+
+            try {
+                // Send data to YOUR Python backend, not Resend directly
+                const response = await fetch('http://localhost:8000/api/contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                if (response.ok) {
+                    statusMsg.textContent = "Thank you! Your request has been sent successfully.";
+                    statusMsg.classList.add('block', 'text-green-400');
+                    this.reset();
+                } else {
+                    throw new Error('Failed to send');
+                }
+            } catch (error) {
+                console.error("Backend Error:", error);
+                statusMsg.textContent = "Error sending message. Please make sure the Python backend is running.";
+                statusMsg.classList.add('block', 'text-red-300');
+            } finally {
+                btn.innerHTML = 'Submit Request';
+                btn.disabled = false;
+            }
+        });
+
+        // Initialize data when page loads
+        window.onload = () => {
+            loadGallery();
+        };
+    </script>
+</body>
+</html>
