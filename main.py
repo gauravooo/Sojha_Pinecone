@@ -71,7 +71,7 @@ gallery_db = [
     {"id": 4, "url": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", "alt": "Valley View"},
     {"id": 5, "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Sunset Glow"},
     {"id": 6, "url": "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Lakeside Cabin"},   
-]
+]#Add more photos as needed by simply appending to this list with new URLs and alt text.
 
 # --- ENDPOINTS ---
 
