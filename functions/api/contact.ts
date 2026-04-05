@@ -1,7 +1,16 @@
-export async function onRequestPost(context: any) {
+interface ContactFormData {
+  name: string;
+  email: string;
+  phone: string;
+  checkin: string;
+  checkout: string;
+  message: string;
+}
+
+export const onRequestPost: PagesFunction<{ RESEND_API_KEY: string }> = async (context) => {
   try {
-    const data = await context.request.json();
-    const { name, email, phone, checkin, checkout, message } = data as any;
+    const data = await context.request.json() as ContactFormData;
+    const { name, email, phone, checkin, checkout, message } = data;
     
     const apiKey = context.env.RESEND_API_KEY;
     if (!apiKey) {
@@ -40,7 +49,8 @@ export async function onRequestPost(context: any) {
       const errorText = await res.text();
       return new Response(JSON.stringify({ error: "Failed to send email", details: errorText }), { status: 500 });
     }
-  } catch (err: any) {
-    return new Response(JSON.stringify({ error: err.message }), { status: 500 });
+  } catch (err: unknown) {
+    const errorMessage = err instanceof Error ? err.message : String(err);
+    return new Response(JSON.stringify({ error: errorMessage }), { status: 500 });
   }
 }

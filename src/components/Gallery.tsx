@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 type GalleryImage = {
   id: number;
@@ -54,19 +54,19 @@ export default function Gallery() {
     }
   };
 
-  const showNext = (e?: React.MouseEvent) => {
+  const showNext = useCallback((e?: React.MouseEvent | KeyboardEvent) => {
     e?.stopPropagation();
     if (lightboxIndex !== null && images.length > 0) {
       setLightboxIndex((lightboxIndex + 1) % images.length);
     }
-  };
+  }, [lightboxIndex, images]);
 
-  const showPrev = (e?: React.MouseEvent) => {
+  const showPrev = useCallback((e?: React.MouseEvent | KeyboardEvent) => {
     e?.stopPropagation();
     if (lightboxIndex !== null && images.length > 0) {
       setLightboxIndex((lightboxIndex - 1 + images.length) % images.length);
     }
-  };
+  }, [lightboxIndex, images]);
 
   const closeLightbox = () => {
     setLightboxIndex(null);
@@ -83,7 +83,7 @@ export default function Gallery() {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [lightboxIndex, images]);
+  }, [lightboxIndex, showNext, showPrev]);
 
   return (
     <section id="gallery" className="py-24 px-6 bg-white w-full">
