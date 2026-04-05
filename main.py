@@ -34,7 +34,7 @@ async def log_http_requests(request: Request, call_next):
 # Allow your frontend to communicate with this backend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # In production, change "*" to your actual frontend domain
+    allow_origins=["*"],  # In production, change "*" to your actual frontend domain(the URL of your deployed frontend)
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -70,7 +70,11 @@ gallery_db = [
     {"id": 3, "url": "https://images.unsplash.com/photo-1588615419958-37daebfc7e0e?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Cozy Interior"},
     {"id": 4, "url": "https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", "alt": "Valley View"},
     {"id": 5, "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Sunset Glow"},
-    {"id": 6, "url": "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Lakeside Cabin"},   
+    {"id": 6, "url": "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Lakeside Cabin"}, 
+    {"id": 7, "url": "https://images.unsplash.com/photo-1500534623283-312aade485b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Snowy Peaks"},
+    {"id": 8, "url": "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Starry Night"},
+    {"id": 9, "url": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Sunset Glow"},
+    {"id": 10, "url": "https://images.unsplash.com/photo-1494526585095-c41746248156?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Lakeside Cabin"},  
 ]#Add more photos as needed by simply appending to this list with new URLs and alt text.
 
 # --- ENDPOINTS ---
