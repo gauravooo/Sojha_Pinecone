@@ -1,4 +1,4 @@
-export const onRequestGet: PagesFunction = async () => {
+export async function onRequestGet() {
   const gallery_db = [
     {"id": 1, "url": "https://images.unsplash.com/photo-1546944641-55db293b6667?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Mountain Mist"},
     {"id": 2, "url": "https://images.unsplash.com/photo-1627885435985-78096f2e82b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80", "alt": "Forest Trail"},

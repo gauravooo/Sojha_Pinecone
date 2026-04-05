@@ -1,4 +1,4 @@
-export const onRequestPost: PagesFunction<{ RESEND_API_KEY: string }> = async (context) => {
+export async function onRequestPost(context: any) {
   try {
     const data = await context.request.json();
     const { name, email, phone, checkin, checkout, message } = data as any;
