@@ -8,14 +8,14 @@ export default function Explore() {
     },
     { 
       title: "Serolsar Lake", 
-      desc: "A crystal-clear, sacred lake accessible via a magnificent forest trek among towering oak trees.",
-      image: "https://images.unsplash.com/photo-1546944641-55db293b6667?auto=format&fit=crop&w=800&q=80",
+      desc: "A sacred high-altitude lake surrounded by dense oak forests, perfect for a day hike.",
+      image: "https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=800&q=80",
       distance: "6 KM"
     },
     { 
-      title: "Raghupur Fort", 
-      desc: "Historic ruins surrounded by sprawling alpine meadows offering 360-degree vistas.",
-      image: "https://images.unsplash.com/photo-1627885435985-78096f2e82b7?auto=format&fit=crop&w=800&q=80",
+      title: "Chehni Kothi", 
+      desc: "Explore this towering 1500-year-old wooden architectural marvel nestled among apple orchards.",
+      image: "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=800&q=80",
       distance: "8 KM"
     }
   ];
