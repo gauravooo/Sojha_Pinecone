@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-brand-light text-brand-text font-sans antialiased;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@layer components {
+  .hero-bg {
+    background-image: linear-gradient(rgba(31, 51, 39, 0.4), rgba(31, 51, 39, 0.7)), var(--hero-bg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+  }
+
+  .form-input {
+    @apply bg-transparent border-b border-white/30 text-white py-2 w-full outline-none transition-colors duration-300;
+  }
+  
+  .form-input:focus {
+    @apply border-white;
+  }
+  
+  .form-input::placeholder {
+    @apply text-white/50;
+  }
+}
+
+/* Webkit Date Picker styling to look decent on dark background */
+::-webkit-calendar-picker-indicator { 
+  filter: invert(1); 
+  opacity: 0.5; 
+  cursor: pointer; 
+}
