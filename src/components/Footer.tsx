@@ -12,7 +12,7 @@ export default function Footer() {
           <i className="fa-brands fa-instagram text-xl"></i>
           <span>Follow Us on Instagram</span>
         </a>
-        <p>&copy; 2026 Sojha Pinecone. All rights reserved. | Created for AI Engineer Journey.</p>
+        <p>&copy; 2026 Sojha Pinecone. All rights reserved.</p>
       </div>
     </footer>
   );
