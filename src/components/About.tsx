@@ -6,6 +6,7 @@ export default function About() {
   const siteData = useContext(ContentContext);
   const dbImage = siteData?.siteImages?.slice().reverse().find((img: any) => img.category === 'about')?.url;
   const aboutImageUrl = dbImage || content.about.image;
+  const address = siteData?.contact?.address || 'Sojha Pinecone, Sojha Village\nBanjar Valley, Himachal Pradesh, India';
 
   return (
     <section id="about" className="py-24 px-6 bg-brand-muted w-full">
@@ -21,7 +22,7 @@ export default function About() {
                     <i className="fa-solid fa-location-dot text-brand-accent mt-1"></i>
                     <div>
                         <h4 className="font-medium text-brand-dark mb-1">Find Us</h4>
-                        <p className="text-sm text-gray-600 font-light">Sojha Pinecone, Sojha Village<br/>Banjar Valley, Himachal Pradesh, India</p>
+                        <p className="text-sm text-gray-600 font-light whitespace-pre-line">{address}</p>
                     </div>
                 </div>
             </div>

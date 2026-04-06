@@ -26,9 +26,20 @@ export default function Navbar() {
                 <a href="#explore" className="hover:text-brand-accent transition">Explore</a>
                 <a href="#contact" className="hover:text-brand-accent transition">Contact</a>
             </div>
-            <button onClick={scrollToContact} className="bg-brand-dark hover:bg-brand-accent text-white px-6 py-2 rounded-sm transition text-sm font-medium tracking-wide">
-                Book Now
-            </button>
+            <div className="flex items-center gap-4">
+                <a
+                    href="https://www.instagram.com/sojhapinecone"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Follow us on Instagram"
+                    className="text-brand-dark hover:text-brand-accent transition text-xl"
+                >
+                    <i className="fa-brands fa-instagram"></i>
+                </a>
+                <button onClick={scrollToContact} className="bg-brand-dark hover:bg-brand-accent text-white px-6 py-2 rounded-sm transition text-sm font-medium tracking-wide">
+                    Book Now
+                </button>
+            </div>
         </div>
     </nav>
   );

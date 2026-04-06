@@ -40,6 +40,26 @@ export default function Contact() {
       setStatus({ type: 'error', message: 'Error sending message. Please try again later.' });
     }
   };
+  const handleWhatsApp = () => {
+    // Strip non-digits and build wa.me link using the hotel phone from context
+    const rawPhone = contactInfo.phone.replace(/\D/g, '');
+    // Ensure country code is present (default +91 if not)
+    const phone = rawPhone.startsWith('91') ? rawPhone : `91${rawPhone}`;
+
+    const checkinText = formData.checkin ? `Check-in: ${formData.checkin}` : '';
+    const checkoutText = formData.checkout ? `Check-out: ${formData.checkout}` : '';
+    const datesText = [checkinText, checkoutText].filter(Boolean).join(', ');
+
+    const message = [
+      `Hi! I would like to enquire about a booking at Sojha Pinecone.`,
+      formData.name ? `Name: ${formData.name}` : '',
+      datesText,
+      formData.message ? `Message: ${formData.message}` : ''
+    ].filter(Boolean).join('\n');
+
+    const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <section id="contact" className="bg-brand-dark text-white py-24 px-6 relative">
@@ -71,6 +91,21 @@ export default function Contact() {
                         <div>
                             <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Address</p>
                             <p className="font-light leading-relaxed whitespace-pre-wrap">{contactInfo.address}</p>
+                        </div>
+                    </div>
+                    <div className="flex items-start gap-4">
+                        <i className="fa-brands fa-instagram mt-1 text-brand-light/50 text-lg"></i>
+                        <div>
+                            <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Instagram</p>
+                            <a
+                                href="https://www.instagram.com/sojhapinecone"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="font-light hover:text-brand-light transition-colors duration-200 flex items-center gap-1 group"
+                            >
+                                @sojhapinecone
+                                <i className="fa-solid fa-arrow-up-right-from-square text-xs opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -121,11 +156,27 @@ export default function Contact() {
                         <textarea id="message" rows={3} required className="form-input text-sm resize-none" value={formData.message} onChange={handleChange}></textarea>
                     </div>
 
-                    <button type="submit" disabled={status.type === 'loading'} className="w-full bg-brand-light text-brand-dark hover:bg-white py-4 rounded-sm transition font-medium text-sm tracking-wide mt-4 disabled:opacity-70">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                      <button
+                        type="submit"
+                        disabled={status.type === 'loading'}
+                        className="w-full bg-brand-light text-brand-dark hover:bg-white py-4 rounded-sm transition font-medium text-sm tracking-wide disabled:opacity-70 flex items-center justify-center gap-2"
+                      >
                         {status.type === 'loading' ? (
                           <><i className="fa-solid fa-circle-notch fa-spin"></i> Sending...</>
-                        ) : 'Submit Request'}
-                    </button>
+                        ) : (
+                          <><i className="fa-regular fa-envelope"></i> Contact via Email</>
+                        )}
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={handleWhatsApp}
+                        className="w-full bg-[#25D366] text-white hover:bg-[#1ebe5d] py-4 rounded-sm transition font-medium text-sm tracking-wide flex items-center justify-center gap-2"
+                      >
+                        <i className="fa-brands fa-whatsapp text-lg"></i> Contact on WhatsApp
+                      </button>
+                    </div>
                     
                     {status.type !== 'idle' && status.type !== 'loading' && (
                         <div className={`text-sm font-light text-center mt-4 ${status.type === 'success' ? 'text-green-400' : 'text-red-400'}`}>

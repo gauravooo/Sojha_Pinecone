@@ -5,6 +5,9 @@ interface Env {
 export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
   const contactResult = await env.DB.prepare("SELECT value FROM site_content WHERE key = 'contact'").first();
   const contact = contactResult ? JSON.parse(contactResult.value as string) : null;
+
+  const explorePlacesResult = await env.DB.prepare("SELECT value FROM site_content WHERE key = 'explore_places'").first();
+  const explorePlaces = explorePlacesResult ? JSON.parse(explorePlacesResult.value as string) : null;
   
   const { results } = await env.DB.prepare(
     "SELECT id, category, '/api/image/' || id as url FROM images WHERE category LIKE 'room_%' OR category IN ('hero', 'about') ORDER BY added_at ASC"
@@ -12,6 +15,7 @@ export const onRequestGet: PagesFunction<Env> = async ({ env }) => {
   
   return Response.json({ 
     contact,
+    explorePlaces,
     siteImages: results.filter((img: any) => img.category === 'hero' || img.category === 'about'),
     roomImages: results.filter((img: any) => img.category.startsWith('room_'))
   }, {

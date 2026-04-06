@@ -1,24 +1,33 @@
+import { useContext } from 'react';
+import { ContentContext } from '../App';
+
+const DEFAULT_PLACES = [
+  { 
+    id: '1',
+    title: "Jalori Pass", 
+    desc: "Experience dramatic panoramic views of the Dhauladhar ranges from this stunning mountain pass just 5 km away.",
+    image: "https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=crop&w=800&q=80",
+    distance: "5 KM"
+  },
+  { 
+    id: '2',
+    title: "Serolsar Lake", 
+    desc: "A sacred high-altitude lake surrounded by dense oak forests, perfect for a day hike.",
+    image: "https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=800&q=80",
+    distance: "6 KM"
+  },
+  { 
+    id: '3',
+    title: "Chehni Kothi", 
+    desc: "Explore this towering 1500-year-old wooden architectural marvel nestled among apple orchards.",
+    image: "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=800&q=80",
+    distance: "8 KM"
+  }
+];
+
 export default function Explore() {
-  const places = [
-    { 
-      title: "Jalori Pass", 
-      desc: "Experience dramatic panoramic views of the Dhauladhar ranges from this stunning mountain pass just 5 km away.",
-      image: "https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=crop&w=800&q=80",
-      distance: "5 KM"
-    },
-    { 
-      title: "Serolsar Lake", 
-      desc: "A sacred high-altitude lake surrounded by dense oak forests, perfect for a day hike.",
-      image: "https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=800&q=80",
-      distance: "6 KM"
-    },
-    { 
-      title: "Chehni Kothi", 
-      desc: "Explore this towering 1500-year-old wooden architectural marvel nestled among apple orchards.",
-      image: "https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=800&q=80",
-      distance: "8 KM"
-    }
-  ];
+  const siteData = useContext(ContentContext);
+  const places = siteData?.explorePlaces ?? DEFAULT_PLACES;
 
   return (
     <>
@@ -34,10 +43,9 @@ export default function Explore() {
                   </div>
               </div>
 
-              {/* Horizontal / Grid Layout for Places */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  {places.map((place, i) => (
-                    <div key={i} className="group cursor-pointer">
+                  {places.map((place: any, i: number) => (
+                    <div key={place.id ?? i} className="group cursor-pointer">
                         <div className="relative h-80 rounded-2xl overflow-hidden mb-6 shadow-sm group-hover:shadow-xl transition-shadow duration-500">
                             <img src={place.image} alt={place.title} className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" loading="lazy" />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300"></div>

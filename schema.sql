@@ -15,3 +15,8 @@ INSERT OR IGNORE INTO site_content (key, value) VALUES (
   'contact', 
   '{"phone":"+91 98765 43210","email":"info@sojhapinecone.com","address":"Sojha Village, Banjar Valley\\nHimachal Pradesh, India"}'
 );
+
+INSERT OR IGNORE INTO site_content (key, value) VALUES (
+  'explore_places',
+  '[{"id":"1","title":"Jalori Pass","desc":"Experience dramatic panoramic views of the Dhauladhar ranges from this stunning mountain pass just 5 km away.","image":"https://images.unsplash.com/photo-1542224566-6e85f2e6772f?auto=format&fit=crop&w=800&q=80","distance":"5 KM"},{"id":"2","title":"Serolsar Lake","desc":"A sacred high-altitude lake surrounded by dense oak forests, perfect for a day hike.","image":"https://images.unsplash.com/photo-1439853949127-fa647821eba0?auto=format&fit=crop&w=800&q=80","distance":"6 KM"},{"id":"3","title":"Chehni Kothi","desc":"Explore this towering 1500-year-old wooden architectural marvel nestled among apple orchards.","image":"https://images.unsplash.com/photo-1473625247510-8ceb1760943f?auto=format&fit=crop&w=800&q=80","distance":"8 KM"}]'
+);
