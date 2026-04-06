@@ -1,6 +1,12 @@
+import { useContext } from 'react';
 import { content } from '../data/content';
+import { ContentContext } from '../App';
 
 export default function About() {
+  const siteData = useContext(ContentContext);
+  const dbImage = siteData?.siteImages?.slice().reverse().find((img: any) => img.category === 'about')?.url;
+  const aboutImageUrl = dbImage || content.about.image;
+
   return (
     <section id="about" className="py-24 px-6 bg-brand-muted w-full">
       <div className="max-w-7xl mx-auto">
@@ -20,7 +26,7 @@ export default function About() {
                 </div>
             </div>
             <div className="relative h-[500px] rounded-lg overflow-hidden shadow-xl">
-                <img src={content.about.image} alt="Sojha Nature" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
+                <img src={aboutImageUrl} alt="Sojha Nature" className="absolute inset-0 w-full h-full object-cover" loading="lazy" />
             </div>
         </div>
       </div>

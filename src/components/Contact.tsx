@@ -1,6 +1,14 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { ContentContext } from '../App';
 
 export default function Contact() {
+  const siteData = useContext(ContentContext);
+  const contactInfo = siteData?.contact || {
+    phone: "+91 98765 43210",
+    email: "info@sojhapinecone.com",
+    address: "Sojha Village, Banjar Valley\nHimachal Pradesh, India"
+  };
+
   const [formData, setFormData] = useState({
     name: '', email: '', phone: '', checkin: '', checkout: '', message: ''
   });
@@ -48,21 +56,21 @@ export default function Contact() {
                         <i className="fa-solid fa-phone mt-1 text-brand-light/50"></i>
                         <div>
                             <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Phone</p>
-                            <p className="font-light">+91 98765 43210</p>
+                            <p className="font-light">{contactInfo.phone}</p>
                         </div>
                     </div>
                     <div className="flex items-start gap-4">
                         <i className="fa-regular fa-envelope mt-1 text-brand-light/50"></i>
                         <div>
                             <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Email</p>
-                            <p className="font-light">info@sojhapinecone.com</p>
+                            <p className="font-light">{contactInfo.email}</p>
                         </div>
                     </div>
                     <div className="flex items-start gap-4">
                         <i className="fa-solid fa-location-dot mt-1 text-brand-light/50"></i>
                         <div>
                             <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Address</p>
-                            <p className="font-light leading-relaxed">Sojha Village, Banjar Valley<br/>Himachal Pradesh, India</p>
+                            <p className="font-light leading-relaxed whitespace-pre-wrap">{contactInfo.address}</p>
                         </div>
                     </div>
                 </div>

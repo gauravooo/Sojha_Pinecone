@@ -1,6 +1,12 @@
+import { useContext } from 'react';
 import { content } from '../data/content';
+import { ContentContext } from '../App';
 
 export default function Hero() {
+  const siteData = useContext(ContentContext);
+  const dbImage = siteData?.siteImages?.slice().reverse().find((img: any) => img.category === 'hero')?.url;
+  const bgImageUrl = dbImage || content.hero.bgImage;
+
   const scrollToContact = () => {
     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -8,7 +14,7 @@ export default function Hero() {
   return (
     <section 
       className="hero-bg h-screen flex items-center justify-center text-center px-4"
-      style={{ '--hero-bg': `url('${content.hero.bgImage}')` } as React.CSSProperties}
+      style={{ '--hero-bg': `url('${bgImageUrl}')` } as React.CSSProperties}
     >
         <div className="max-w-3xl animate-fade-in-up">
             <p className="text-white/80 tracking-[0.2em] text-sm font-semibold uppercase mb-4">{content.hero.subtitle}</p>

@@ -7,3 +7,9 @@ pages_build_output_dir = "dist"
 # Add non-sensitive environment variables here.
 # NOTE: Secrets like RESEND_API_KEY must remain in .dev.vars for local development 
 # and be added via the Cloudflare Pages UI for your production deployment.
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hotel-db"
+database_id = "local-hotel-db"
+
