@@ -3,7 +3,7 @@ export default function Footer() {
     <footer className="bg-[#15241b] text-white/50 py-10 text-center text-sm font-light">
       <div className="flex flex-col items-center gap-4">
         <a
-          href="https://www.instagram.com/sojhapinecone"
+          href="https://www.instagram.com/sojha_pinecone"
           target="_blank"
           rel="noopener noreferrer"
           className="flex items-center gap-2 text-white/70 hover:text-brand-light transition-colors duration-200 text-sm"

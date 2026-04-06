@@ -28,7 +28,7 @@ export default function Navbar() {
             </div>
             <div className="flex items-center gap-4">
                 <a
-                    href="https://www.instagram.com/sojhapinecone"
+                    href="https://www.instagram.com/sojha_pinecone"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Follow us on Instagram"

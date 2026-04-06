@@ -98,7 +98,7 @@ export default function Contact() {
                         <div>
                             <p className="text-xs text-white/50 uppercase tracking-wider mb-1">Instagram</p>
                             <a
-                                href="https://www.instagram.com/sojhapinecone"
+                                href="https://www.instagram.com/sojha_pinecone"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="font-light hover:text-brand-light transition-colors duration-200 flex items-center gap-1 group"
