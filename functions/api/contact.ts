@@ -18,7 +18,7 @@ export const onRequestPost: PagesFunction<{ RESEND_API_KEY: string }> = async (c
     }
 
     const fromEmail = "onboarding@resend.dev"; 
-    const toEmail = "deepeshsinghsojha@gmail.com";
+    const toEmail = "info@sojhapinecone.in";
     
     const htmlContent = `
         <h3>New Booking Request - Sojha Pinecone</h3>
