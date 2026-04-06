@@ -11,5 +11,5 @@ pages_build_output_dir = "dist"
 [[d1_databases]]
 binding = "DB"
 database_name = "hotel-db"
-database_id = "local-hotel-db"
+database_id = "b3ae34ed-bd50-4957-b493-875410c8a7f3"
 
