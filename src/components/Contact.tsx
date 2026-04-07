@@ -112,7 +112,7 @@ export default function Contact() {
 
                 <div className="w-full h-64 rounded-lg overflow-hidden mt-auto shadow-inner">
                     <iframe 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.287204041811!2d77.3704211!3d31.568221700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3905af3473c8f403%3A0x38f81b85c63511c9!2sShoja%20Pinecone!5e1!3m2!1sen!2sin!4v1775572886023!5m2!1sen!2sin&t=m" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.394729731334!2d77.3704211!3d31.568221700000002!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3905af3473c8f403%3A0x38f81b85c63511c9!2sShoja%20Pinecone!5e0!3m2!1sen!2sin!4v1775573823878!5m2!1sen!2sin" 
                         width="100%" 
                         height="100%" 
                         style={{ border: 0 }} 
