@@ -33,6 +33,15 @@ interface Place {
   distance: string;
 }
 
+interface Room {
+  id: string;
+  name: string;
+  description: string;
+  features: string[];
+  original_price: number | null;
+  current_price: number | null;
+}
+
 export default function Admin() {
   const [token, setToken] = useState(() => localStorage.getItem("adminToken") || "");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -40,6 +49,7 @@ export default function Admin() {
   const [contact, setContact] = useState({ phone: "", email: "", address: "" });
   const [images, setImages] = useState<any[]>([]);
   const [places, setPlaces] = useState<Place[]>(DEFAULT_PLACES);
+  const [rooms, setRooms] = useState<Room[]>([]);
   const [view, setView] = useState('contact');
   const [status, setStatus] = useState("");
 
@@ -63,10 +73,14 @@ export default function Admin() {
       const data = await res.json();
       if (data.contact) setContact(data.contact);
       if (data.explorePlaces) setPlaces(data.explorePlaces);
-      
+
       const resGallery = await fetch(`/api/gallery?t=${timestamp}`);
       const dataGallery = await resGallery.json();
       setImages([...(data.roomImages || []), ...(dataGallery.images || [])]);
+
+      const resRooms = await fetch(`/api/rooms?t=${timestamp}`);
+      const dataRooms = await resRooms.json();
+      if (dataRooms.rooms) setRooms(dataRooms.rooms);
     } catch (err) {
       console.error(err);
       if ((err as Error).message.includes("401")) logout();
@@ -127,6 +141,57 @@ export default function Admin() {
       else setStatus("Error saving.");
     } catch {
       setStatus("Network error.");
+    }
+  };
+
+  // ── Room helpers ──
+  const addRoom = () => {
+    const newId = 'room_' + Date.now();
+    setRooms(prev => [...prev, { id: newId, name: '', description: '', features: [], original_price: null, current_price: null }]);
+  };
+
+  const updateRoom = (id: string, field: keyof Room, value: any) => {
+    setRooms(prev => prev.map(r => r.id === id ? { ...r, [field]: value } : r));
+  };
+
+
+  const addFeature = (roomId: string, feature: string) => {
+    if (!feature.trim()) return;
+    setRooms(prev => prev.map(r => r.id === roomId ? { ...r, features: [...r.features, feature.trim()] } : r));
+  };
+
+  const removeFeature = (roomId: string, index: number) => {
+    setRooms(prev => prev.map(r => r.id === roomId ? { ...r, features: r.features.filter((_, i) => i !== index) } : r));
+  };
+
+  const saveRoom = async (room: Room) => {
+    setStatus('Saving room...');
+    try {
+      const res = await fetch('/api/admin/rooms', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(room)
+      });
+      if (res.ok) setStatus('Room saved!');
+      else if (res.status === 401) return logout();
+      else setStatus('Error saving room.');
+    } catch {
+      setStatus('Network error.');
+    }
+  };
+
+  const deleteRoom = async (id: string) => {
+    if (!window.confirm('Delete this room?')) return;
+    setStatus('Deleting...');
+    try {
+      const res = await fetch(`/api/admin/rooms?id=${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      if (res.ok) { setRooms(prev => prev.filter(r => r.id !== id)); setStatus('Room deleted.'); }
+      else if (res.status === 401) logout();
+    } catch {
+      setStatus('Network error.');
     }
   };
 
@@ -277,6 +342,7 @@ export default function Admin() {
         <ul className="space-y-4 flex-1">
           <li><button onClick={() => setView('contact')} className={view === 'contact' ? 'text-brand-light' : 'opacity-70 hover:opacity-100'}>Contact Info</button></li>
           <li><button onClick={() => setView('explore')} className={view === 'explore' ? 'text-brand-light' : 'opacity-70 hover:opacity-100'}>Explore Places</button></li>
+          <li><button onClick={() => setView('rooms_content')} className={view === 'rooms_content' ? 'text-brand-light' : 'opacity-70 hover:opacity-100'}>Rooms &amp; Pricing</button></li>
           <li><button onClick={() => setView('site_images')} className={view === 'site_images' ? 'text-brand-light' : 'opacity-70 hover:opacity-100'}>Site Images</button></li>
           <li><button onClick={() => setView('gallery')} className={view === 'gallery' ? 'text-brand-light' : 'opacity-70 hover:opacity-100'}>Gallery Images</button></li>
           <li><button onClick={() => setView('rooms')} className={view === 'rooms' ? 'text-brand-light' : 'opacity-70 hover:opacity-100'}>Room Images</button></li>
@@ -458,6 +524,120 @@ export default function Admin() {
           <div className="bg-white p-6 rounded-lg shadow-sm">
             <h3 className="text-xl mb-4 font-serif text-gray-800">Deluxe Room Slider Images</h3>
             <ImageGrid category="room_deluxe" />
+          </div>
+        )}
+
+        {/* ── Rooms & Pricing ── */}
+        {view === 'rooms_content' && (
+          <div className="space-y-8">
+            <div className="flex items-center justify-between">
+              <p className="text-sm text-gray-500">Manage room details and pricing. Original price is optional — leave blank to show only the current price.</p>
+              <button
+                onClick={addRoom}
+                className="bg-brand-dark text-white px-4 py-2 rounded text-sm hover:bg-black transition flex items-center gap-2"
+              >
+                <i className="fa-solid fa-plus"></i> Add Room Type
+              </button>
+            </div>
+
+            {rooms.map(room => {
+              const hasDiscount = room.original_price && room.current_price && room.original_price > room.current_price;
+              const discountPct = hasDiscount ? Math.round((1 - room.current_price! / room.original_price!) * 100) : 0;
+
+              return (
+                <div key={room.id} className="bg-white p-6 rounded-lg shadow-sm border border-gray-100 space-y-5">
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-serif text-xl text-brand-dark">{room.name || 'New Room'}</h3>
+                    <button onClick={() => deleteRoom(room.id)} className="text-red-400 hover:text-red-600 transition text-sm"><i className="fa-solid fa-trash mr-1"></i>Delete</button>
+                  </div>
+
+                  <div className="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-sm text-gray-600 mb-1">Room Name</label>
+                      <input type="text" className={inputClass} value={room.name} onChange={e => updateRoom(room.id, 'name', e.target.value)} placeholder="e.g. Deluxe Mountain View" />
+                    </div>
+                    <div className="md:col-span-2">
+                      <label className="block text-sm text-gray-600 mb-1">Description</label>
+                      <textarea className={inputClass} rows={3} value={room.description} onChange={e => updateRoom(room.id, 'description', e.target.value)} placeholder="Room description..." />
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <div>
+                    <label className="block text-sm text-gray-600 mb-2">Features</label>
+                    <div className="flex flex-wrap gap-2 mb-2">
+                      {room.features.map((f, i) => (
+                        <span key={i} className="flex items-center gap-1.5 bg-gray-100 text-gray-700 text-xs px-3 py-1.5 rounded-full">
+                          {f}
+                          <button onClick={() => removeFeature(room.id, i)} className="text-gray-400 hover:text-red-500 transition">
+                            <i className="fa-solid fa-xmark text-[10px]"></i>
+                          </button>
+                        </span>
+                      ))}
+                    </div>
+                    <div className="flex gap-2">
+                      <input
+                        type="text"
+                        className={`${inputClass} text-sm`}
+                        placeholder="Add a feature, press Enter"
+                        onKeyDown={e => {
+                          if (e.key === 'Enter') {
+                            addFeature(room.id, (e.target as HTMLInputElement).value);
+                            (e.target as HTMLInputElement).value = '';
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+
+                  {/* Pricing */}
+                  <div className="grid md:grid-cols-3 gap-4 items-end">
+                    <div>
+                      <label className="block text-sm text-gray-600 mb-1">Original Price (₹) <span className="text-gray-400 font-normal">optional</span></label>
+                      <input
+                        type="number"
+                        className={inputClass}
+                        placeholder="e.g. 5000"
+                        value={room.original_price ?? ''}
+                        onChange={e => updateRoom(room.id, 'original_price', e.target.value ? Number(e.target.value) : null)}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm text-gray-600 mb-1">Current Price (₹)</label>
+                      <input
+                        type="number"
+                        className={inputClass}
+                        placeholder="e.g. 3500"
+                        value={room.current_price ?? ''}
+                        onChange={e => updateRoom(room.id, 'current_price', e.target.value ? Number(e.target.value) : null)}
+                      />
+                    </div>
+                    <div>
+                      {hasDiscount ? (
+                        <div className="flex items-center gap-2 pb-2">
+                          <span className="bg-emerald-100 text-emerald-700 text-sm font-semibold px-3 py-1.5 rounded-full">{discountPct}% OFF</span>
+                          <span className="text-gray-400 text-sm line-through">₹{room.original_price!.toLocaleString('en-IN')}</span>
+                          <span className="text-brand-dark font-semibold">₹{room.current_price!.toLocaleString('en-IN')}</span>
+                        </div>
+                      ) : room.current_price ? (
+                        <div className="pb-2 text-brand-dark font-semibold">₹{room.current_price.toLocaleString('en-IN')}/night</div>
+                      ) : <div className="pb-2 text-gray-400 text-sm">No price set</div>}
+                    </div>
+                  </div>
+
+                  <button
+                    onClick={() => saveRoom(room)}
+                    className="bg-brand-dark hover:bg-black text-white px-6 py-2 rounded transition shadow-sm text-sm"
+                  >
+                    Save Room
+                  </button>
+                </div>
+              );
+            })}
+
+            {rooms.length === 0 && (
+              <div className="bg-white p-12 rounded-lg text-center text-gray-400">No rooms yet. Click "Add Room Type" to get started.</div>
+            )}
           </div>
         )}
 
