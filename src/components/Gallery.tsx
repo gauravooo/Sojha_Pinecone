@@ -131,11 +131,11 @@ export default function Gallery() {
                 onTouchEnd={onCarouselTouchEnd}
               >
                 {images.map((img) => (
-                  <div key={img.id} className="min-w-full aspect-[4/3] relative flex-shrink-0">
+                  <div key={img.id} className="flex-[0_0_100%] w-full aspect-[4/3] relative">
                     <img
                       src={img.url}
                       alt={img.alt}
-                      className="w-full h-full object-cover"
+                      className="absolute inset-0 w-full h-full object-cover"
                       loading="lazy"
                       onClick={() => setLightboxIndex(carouselIndex)}
                     />
