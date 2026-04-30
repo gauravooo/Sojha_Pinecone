@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { ContentContext } from '../App';
 
 const DEFAULT_PLACES = [
@@ -28,6 +28,11 @@ const DEFAULT_PLACES = [
 export default function Explore() {
   const siteData = useContext(ContentContext);
   const places = siteData?.explorePlaces ?? DEFAULT_PLACES;
+  const [expandedDescIds, setExpandedDescIds] = useState<Record<string, boolean>>({});
+
+  const toggleDesc = (id: string | number) => {
+    setExpandedDescIds(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   return (
     <>
@@ -54,7 +59,19 @@ export default function Explore() {
                             </div>
                         </div>
                         <h4 className="font-serif text-2xl text-brand-dark mb-3 group-hover:text-brand-accent transition-colors">{place.title}</h4>
-                        <p className="text-sm text-gray-500 font-light leading-relaxed">{place.desc}</p>
+                        <p className="text-sm text-gray-500 font-light leading-relaxed">
+                            {expandedDescIds[place.id ?? i] || !place.desc || place.desc.length <= 100 
+                                ? place.desc 
+                                : `${place.desc.substring(0, 100)}...`}
+                            {place.desc && place.desc.length > 100 && (
+                                <button 
+                                    onClick={() => toggleDesc(place.id ?? i)} 
+                                    className="ml-1 text-brand-accent hover:text-brand-dark transition-colors font-medium focus:outline-none"
+                                >
+                                    {expandedDescIds[place.id ?? i] ? 'Show Less' : 'Show More'}
+                                </button>
+                            )}
+                        </p>
                     </div>
                   ))}
               </div>
